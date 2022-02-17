@@ -6,13 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlin_room.model.MemoEntity
 import com.example.kotlin_room.databinding.ItemRvMemoBinding
+import com.example.kotlin_room.viewmodel.MainViewModel
 
-class RvAdapter(val context: Context,
-                var list: List<MemoEntity>,
-                var deleteListener : OnDeleteListener) : RecyclerView.Adapter<RvAdapter.VH>() {
+class RvAdapter(
+    var list: List<MemoEntity>,
+    var deleteListener: OnDeleteListener) : RecyclerView.Adapter<RvAdapter.VH>() {
 
     lateinit var binding : ItemRvMemoBinding
 

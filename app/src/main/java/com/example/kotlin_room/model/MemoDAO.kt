@@ -1,5 +1,6 @@
 package com.example.kotlin_room.model
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -18,7 +19,7 @@ interface MemoDAO {
 
     // memo entity의 tableName 이 memo 이기 때문에 memo를 조회
     @Query("SELECT * FROM memo")
-    fun getAll() : List<MemoEntity>
+    fun getAll() : LiveData<List<MemoEntity>>
 
     @Delete
     fun delete(memo: MemoEntity)
