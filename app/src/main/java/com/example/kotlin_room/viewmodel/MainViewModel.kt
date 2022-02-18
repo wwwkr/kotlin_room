@@ -2,10 +2,8 @@ package com.example.kotlin_room.viewmodel
 
 import android.app.Application
 import android.util.Log
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
+import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlin_room.OnDeleteListener
 import com.example.kotlin_room.RvAdapter
 import com.example.kotlin_room.model.MemoDatabase
@@ -13,7 +11,7 @@ import com.example.kotlin_room.model.MemoEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class MainViewModel(application: Application) : AndroidViewModel(application) {
+class MainViewModel(application: Application) : AndroidViewModel(application) , OnDeleteListener{
 
     var TAG = "MainViewModel"
     private var db : MemoDatabase = MemoDatabase.getInstance(application)!!
@@ -23,7 +21,12 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     var newMemo : String? = null
 
+    lateinit var adapter: RvAdapter
+
+
     init {
+
+
         memo = getAllMemo()
     }
 
@@ -58,6 +61,20 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
 
     }
+
+    fun setRecyclerView(memoList: List<MemoEntity> , rvMemo : RecyclerView)  {
+
+        adapter = RvAdapter( memoList, this)
+        rvMemo.adapter = adapter
+
+
+    }
+
+    override fun onDeleteListener(memo: MemoEntity) {
+        deleteMemo(memo)
+
+    }
+
 
 
 
