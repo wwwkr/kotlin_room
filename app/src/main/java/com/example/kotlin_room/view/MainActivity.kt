@@ -20,9 +20,6 @@ import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var db : MemoDatabase
-    var memoList = listOf<MemoEntity>()
-
     lateinit var binding: ActivityMainBinding
 
     lateinit var viewModel : MainViewModel
@@ -58,8 +55,6 @@ class MainActivity : AppCompatActivity() {
         })
 
     }
-
-
 
 
 

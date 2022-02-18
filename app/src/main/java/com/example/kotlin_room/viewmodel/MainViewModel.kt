@@ -14,22 +14,12 @@ import kotlinx.coroutines.launch
 class MainViewModel(application: Application) : AndroidViewModel(application) , OnDeleteListener{
 
     var TAG = "MainViewModel"
+
     private var db : MemoDatabase = MemoDatabase.getInstance(application)!!
-
-
-    var memo : LiveData<List<MemoEntity>>
 
     var newMemo : String? = null
 
     lateinit var adapter: RvAdapter
-
-
-    init {
-
-
-        memo = getAllMemo()
-    }
-
 
     fun getAllMemo(): LiveData<List<MemoEntity>> {
 
@@ -39,12 +29,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) , 
     }
 
 
-
     fun insertMemo(memo: String) {
 
         viewModelScope.launch(Dispatchers.IO){
             db.memoDAO().insert(MemoEntity(null, memo))
-
 
         }
 
@@ -67,15 +55,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) , 
         adapter = RvAdapter( memoList, this)
         rvMemo.adapter = adapter
 
-
     }
 
     override fun onDeleteListener(memo: MemoEntity) {
         deleteMemo(memo)
-
     }
-
-
 
 
 }
