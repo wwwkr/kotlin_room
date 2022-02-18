@@ -52,6 +52,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.getAllMemo().observe(this, Observer {
 
             viewModel.setRecyclerView(it , binding.rvMemo)
+            binding.etMemo.setText("")
         })
 
     }
